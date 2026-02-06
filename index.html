@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Segunda Mão Mangop</title>
+  <link rel="icon" type="image/jpeg" href="imagens/logo-mangop.jpg">
+  <style>
+    :root {
+      --primary:#0077b6;
+      --accent:#90e0ef;
+      --bg:#f7fbff;
+      --text:#023e8a;
+      --card:#fff;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); }
+
+    header {
+      position:sticky; top:0; z-index:1000;
+      background:var(--primary); color:#fff;
+      padding:0.6rem 1rem;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    header a { text-decoration:none; display:flex; align-items:center; gap:0.5rem; color:#fff; }
+    header img { height:100px; border-radius:8px; }
+    header h1 { font-size:1.2rem; }
+    header p { font-size:0.9rem; font-style:italic; }
+
+    .btn-acao {
+      display:inline-block; padding:0.35rem 0.6rem;
+      border-radius:6px; font-weight:600; text-decoration:none;
+      font-size:0.85rem;
+    }
+    .btn-publicar { background:#0077b6; color:#fff; }
+    .btn-whatsapp { background:#25D366; color:#fff; font-size:0.75rem; }
+    .btn-pagamento { background:#ff8800; color:#fff; }
+
+    .content { display:grid; grid-template-columns:260px 1fr 320px; gap:1rem; padding:1rem; }
+    .sidebar {
+      background:var(--card); border:1px solid #eef0f4; border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,.06); padding:1rem; height:fit-content;
+    }
+    .sidebar h2 { margin-bottom:.6rem; font-size:1.05rem; border-bottom:2px solid #eef0f4; padding-bottom:.5rem; }
+    .sidebar label { display:block; margin:.6rem 0 .25rem; font-size:.9rem; }
+    .sidebar select, .sidebar input { width:100%; padding:.5rem; border-radius:6px; border:1px solid #d8dce2; }
+
+    .container { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
+    .product {
+      background:var(--card); border:1px solid #eef0f4; border-radius:12px;
+      box-shadow:0 6px 18px rgba(0,0,0,.06); padding:0.9rem;
+      transition:transform .08s ease, box-shadow .08s ease;
+    }
+    .product:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.08); }
+    .product img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; background:#e9edf3; }
+    .product h3 { margin:.6rem 0 .3rem; font-size:1rem; }
+    .price { font-weight:600; color:var(--primary); margin-bottom:.2rem; }
+    .product small { color:#6c7a92; }
+    .actions { display:flex; gap:.5rem; margin-top:.6rem; }
+    button { background:var(--primary); color:#fff; border:none; padding:.55rem .7rem; border-radius:6px; cursor:pointer; font-size:.9rem; }
+    button.outline { background:transparent; color:var(--primary); border:1px solid var(--primary); }
+
+    .cart-item { display:grid; grid-template-columns:1fr auto auto; gap:.5rem; align-items:center; margin-bottom:.5rem; }
+    .cart-total { display:flex; justify-content:space-between; padding-top:.6rem; border-top:2px solid #eef0f4; font-weight:600; margin-top:.5rem; }
+    #pagination { text-align:center; margin-top:1rem; }
+    #pagination button { margin:.2rem; }
+    footer { background:var(--accent); color:var(--text); text-align:center; padding:1rem; margin-top:2rem; }
+
+    .modal {
+  display: none;              /* começa escondido */
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+
+  /* centralização só quando ativo */
+  justify-content: center;
+  align-items: center;
+}
+
+
+.modal-content {
+  background: #fff;              /* fundo branco para legibilidade */
+  padding: 1rem;
+  border-radius: 12px;
+  max-width: 800px;              /* tamanho ideal no desktop */
+  width: 90%;                    /* ajusta no mobile */
+  max-height: 90vh;              /* nunca ultrapassa a tela */
+  overflow-y: auto;              /* scroll interno se necessário */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  color: #000;                   /* texto bem visível */
+}
+    .close {
+      float: right;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+	
+
+    
+    #modal-main-image { text-align: center; margin-bottom: 1rem; }
+    #modal-main-image img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+    #modal-images { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    #modal-images img {
+      width: 120px; height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    #modal-images img:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" style="display:flex; align-items:center; gap:0.5rem; text-decoration:none; color:#fff;">
+      <img src="imagens/logo-mangop.jpg" alt="Logomarca Segunda Mão Mangop" style="height:100px; border-radius:8px;" />
+      <div>
+        <h1 id="site-title">Segunda Mão Mangop</h1>
+        <p id="site-slogan">Não é lixo, é oportunidade!!!</p>
+      </div>
+    </a>
+    <div class="search-bar" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <a href="publicar.html" class="btn-publicar">📢 Publicar anúncio</a>
+      <a href="https://wa.me/244976194731" target="_blank" class="btn-acao btn-whatsapp">
+        <img src="imagens/whatsapp-logo.jpg" alt="WhatsApp" style="height:20px; vertical-align:middle; margin-right:6px;" />
+        WhatsApp
+      </a>
+      <a href="pagamento.html" class="btn-acao btn-pagamento">🔐 Pagamento Seguro</a>
+      <a href="carrinho.html" class="btn-acao btn-carrinho">🛒 Carrinho</a>
+    </div>
+  </header>
+
+  <main class="content">
+    <!-- Filtros -->
+    <aside class="sidebar filtros">
+      <h2>Filtros</h2>
+      <label for="searchSidebar">Pesquisar</label>
+      <div style="display:flex; gap:.4rem;">
+        <input id="searchSidebar" type="text" placeholder="Pesquisar produto..." aria-label="Pesquisar produto" style="flex:1;" />
+        <button id="clearSearchSidebar" class="orange" aria-label="Limpar pesquisa">✖</button>
+      </div>
+
+      <label for="filtroCategoria">Categoria</label>
+      <select id="filtroCategoria">
+        <option value="">Todas</option>
+        <option>Móveis</option>
+        <option>Eletrónica</option>
+        <option>Eletrodomesticos</option>
+        <option>Moda</option>
+        <option>Casa e Jardim</option>
+        <option>Ferramentas</option>
+        <option>Outros</option>
+      </select>
+
+      <label for="filtroEstado">Estado</label>
+      <select id="filtroEstado">
+        <option value="">Todos</option>
+        <option>Usado</option>
+        <option>Como novo</option>
+        <option>Selado</option>
+      </select>
+
+      <label for="filtroMarca">Marca</label>
+      <input id="filtroMarca" type="text" placeholder="Ex: Samsung, Bosch..." />
+
+      <label for="filtroPreco">Ordenar por preço</label>
+      <select id="filtroPreco">
+        <option value="">Sem ordenação</option>
+        <option value="asc">Menor preço</option>
+        <option value="desc">Maior preço</option>
+      </select>
+
+      <a href="index.html" class="btn-acao btn-ver-todos">🔄 Ver todos os produtos</a>
+      <a href="publicar.html" class="btn-acao btn-publicar">📢 Publicar anúncio</a>
+    </aside>
+
+    <!-- Produtos -->
+    <section>
+      <div class="container" id="product-list"></div>
+      <div id="pagination"></div>
+      <div style="margin-top:1rem; text-align:center;">
+        <a href="https://wa.me/244976194731" target="_blank" class="btn-acao" style="background:#25D366;">💬 Falar no WhatsApp</a>
+        <a href="publicar.html" class="btn-acao btn-publicar">📢 Publicar anúncio</a>
+        <a href="carrinho.html" class="btn-acao btn-carrinho">🛒 Ir para Carrinho</a>
+      </div>
+    </section>
+
+    <!-- Carrinho -->
+    <aside class="sidebar carrinho">
+      <h2>Carrinho</h2>
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cart-total">0 Kz</span>
+      </div>
+      <button onclick="window.location.href='carrinho.html'">🛒 Finalizar Compras</button>
+    </aside>
+  </main>
+  
+  <!-- Modal institucional (único) -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <div id="modal-main-image"></div>
+      <div id="modal-images"></div>
+      <div id="modal-details"></div>
+    </div>
+  </div>
+
+  <footer>
+    Segunda Mão Mangop – Não é lixo, é oportunidade<br>
+    📍 Kilamba, Luanda – Angola
+    <div style="margin-top:1rem; text-align:center;">
+      <a href="https://wa.me/244976194731" target="_blank" class="btn-acao" style="background:#25D366;">
+        <img src="imagens/whatsapp-logo.jpg" alt="WhatsApp" style="height:20px; vertical-align:middle; margin-right:6px;" />
+        Falar no WhatsApp
+      </a>
+      <a href="publicar.html" class="btn-acao btn-publicar">📢 Publicar anúncio</a>
+      <a href="carrinho.html" class="btn-acao btn-carrinho">🛒 Ir para Carrinho</a>
+    </div>
+  </footer>
+
+  <script>
+// ---------------- Utilitários ----------------
+const byId = (id) => document.getElementById(id);
+const fmtKZ = (v) => `${v.toLocaleString('pt-PT')} Kz`;
+const normalize = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+const debounce = (fn, d = 250) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), d); }; };
+
+// ---------------- Estado principal ----------------
+const IMG_PH = "https://via.placeholder.com/300x300?text=Produto";
+let cart = JSON.parse(localStorage.getItem("carrinhoSegundaMaoMangop")) || [];
+let paginaAtual = 1;
+const itensPorPagina = 50;
+
+// ---------------- Produtos ----------------
+const produtos = [
+  {id:1, name:"Mesa de jantar 6 lugares", price:45000, estado:"Usado", marca:"Madeira Angola", category:"Móveis", image:"imagens/Mesadejantar6lugares.jpg"},
+  {id:2, name:"Smartphone Samsung A12", price:85000, estado:"Como novo", marca:"Samsung", category:"Eletrónica", image:"imagens/SmartphoneSamsungA12.jpg"},
+  {id:3, name:"Ventoinha de pé", price:12000, estado:"Usado", marca:"Binatone", category:"Eletrónica", image:"imagens/ventoinha.jpg"},
+  {id:4, name:"Conjunto de sofás 3+2", price:95000, estado:"Como novo", marca:"DecoLux", category:"Móveis", image:"imagens/sofa3-2.jpg"},
+  {id:5, name:"TV LG 42\"", price:110000, estado:"Usado", marca:"LG", category:"Eletrónica", image:"imagens/tv-lg-42.jpg"},
+  {id:6, name:"Cadeira de escritório", price:60000, estado:"Como novo", marca:"IKEA", category:"Casa e Jardim", image:"imagens/cadeira-escritorio.jpg"},
+  {id:7, name:"Liquidificador", price:15000, estado:"Usado", marca:"Philips", category:"Casa e Jardim", image:"imagens/liquidificador.jpg"},
+  {id:8, name:"Relógio inteligente", price:30000, estado:"Selado", marca:"Apple", category:"Moda", image:"imagens/relogio-inteligente.jpg"},
+  {id:9, name:"Máquina de lavar", price:120000, estado:"Usado", marca:"Samsung", category:"Eletrónica", image:"imagens/maquina-de-lavar.jpg"},
+  {id:10, name:"Mesa de cabeceira", price:25000, estado:"Como novo", marca:"DecoLux", category:"Móveis", image:"imagens/mesa-de-cabeceira.jpg"},
+  {id:11, name:"Aspirador", price:40000, estado:"Usado", marca:"Bosch", category:"Casa e Jardim", image:"imagens/aspirador.jpg"},
+  {id:12, name:"Tablet Lenovo", price:70000, estado:"Selado", marca:"Lenovo", category:"Eletrónica", image:"imagens/Tablet.jpg"},
+  {id:13, name:"Cama de casal", price:100000, estado:"Usado", marca:"IKEA", category:"Móveis", image:"imagens/cama-casal.jpg"},
+  {id:14, name:"Máquina de café", price:35000, estado:"Como novo", marca:"Nespresso", category:"Casa e Jardim", image:"imagens/maquina-de-cafe.jpg"},
+  {id:15, name:"Geleira Essential", price:350000, estado:"Usado", marca:"Essential", category:"Eletrodomesticos", image:"imagens/L03-ELT-0001.jpg"}
+];
+
+// ---------------- Renderização de produtos + paginação ----------------
+function renderProducts(list) {
+  const el = byId("product-list");
+  const paginador = byId("pagination");
+  if (!el) return;
+
+  const totalPaginas = Math.ceil(list.length / itensPorPagina) || 1;
+  if (paginaAtual > totalPaginas) paginaAtual = totalPaginas;
+  if (paginaAtual < 1) paginaAtual = 1;
+
+  const inicio = (paginaAtual - 1) * itensPorPagina;
+  const fim = inicio + itensPorPagina;
+  const pagina = list.slice(inicio, fim);
+
+  el.innerHTML = "";
+  pagina.forEach(p => {
+    const imgSrc = (p.image && p.image.trim()) ? p.image : IMG_PH;
+    const card = document.createElement("div");
+    card.className = "product";
+    card.innerHTML = `
+      <img src="${imgSrc}" alt="${p.name}" onclick="openModal(${p.id})">
+      <h3>${p.name}</h3>
+      <div class="price">${fmtKZ(p.price)}</div>
+      <p><small>${p.estado} | ${p.marca}</small></p>
+      <div class="actions">
+        <button onclick="addToCart(${p.id})">Adicionar ao carrinho</button>
+        <button class="outline" onclick="moreLikeThis('${p.category}','${p.marca}')">Ver similares</button>
+      </div>
+    `;
+    el.appendChild(card);
+  });
+
+  if (paginador) {
+    paginador.innerHTML = "";
+    if (totalPaginas > 1) {
+      if (paginaAtual > 1) {
+        const btnPrev = document.createElement("button");
+        btnPrev.textContent = "⬅️ Página anterior";
+        btnPrev.onclick = () => { paginaAtual--; renderProducts(list); };
+        paginador.appendChild(btnPrev);
+      }
+      if (paginaAtual < totalPaginas) {
+        const btnNext = document.createElement("button");
+        btnNext.textContent = "➡️ Próxima página";
+        btnNext.onclick = () => { paginaAtual++; renderProducts(list); };
+        paginador.appendChild(btnNext);
+      }
+    }
+  }
+}
+
+// ---------------- Carrinho ----------------
+function renderCart() {
+  const itemsEl = byId("cart-items");
+  if (!itemsEl) return;
+  itemsEl.innerHTML = "";
+  cart.forEach((item, index) => {
+    const subtotal = item.price * (item.quantidade || 1);
+    const row = document.createElement("div");
+    row.className = "cart-item";
+    row.innerHTML = `
+      <span>${item.name}</span>
+      <span>${fmtKZ(item.price)} (cada)</span>
+      <div>
+        <button onclick="alterarQuantidade(${index}, -1)">-</button>
+        <span>${item.quantidade || 1}</span>
+        <button onclick="alterarQuantidade(${index}, 1)">+</button>
+        <span>Subtotal: ${fmtKZ(subtotal)}</span>
+        <button class="outline" onclick="removeFromCart(${index})">Remover</button>
+      </div>
+    `;
+    itemsEl.appendChild(row);
+  });
+  const total = cart.reduce((sum, i) => sum + i.price * (i.quantidade || 1), 0);
+  byId("cart-total").textContent = fmtKZ(total);
+}
+
+function addToCart(id) {
+  const produto = produtos.find(p => p.id === id);
+  const existente = cart.find(i => i.id === id);
+  if (existente) {
+    existente.quantidade = (existente.quantidade || 1) + 1;
+  } else {
+    cart.push({ ...produto, quantidade: 1 });
+  }
+  localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+  renderCart();
+}
+
+function alterarQuantidade(index, delta) {
+  cart[index].quantidade = (cart[index].quantidade || 1) + delta;
+  if (cart[index].quantidade <= 0) {
+    removeFromCart(index);
+  } else {
+    localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+    renderCart();
+  }
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+  renderCart();
+}
+
+function moreLikeThis(cat, marca) {
+  const sugestoes = produtos.filter(p => p.category === cat || p.marca === marca);
+  paginaAtual = 1;
+  renderProducts(sugestoes);
+  const listTop = byId("product-list")?.offsetTop || 0;
+  window.scrollTo({ top: listTop - 80, behavior: "smooth" });
+}
+
+// ---------------- Filtros + pesquisa lateral ----------------
+function aplicarTudo() {
+  const cat   = byId("filtroCategoria")?.value || "";
+  const est   = byId("filtroEstado")?.value || "";
+  const marca = normalize(byId("filtroMarca")?.value || "");
+  const preco = byId("filtroPreco")?.value || "";
+   const termo = normalize(byId("searchSidebar")?.value || "");
+
+  let filtrados = produtos.filter(p =>
+    (!cat   || p.category === cat) &&
+    (!est   || p.estado === est) &&
+    (!marca || normalize(p.marca).includes(marca)) &&
+    (!termo || normalize(p.name).includes(termo))
+  );
+
+  if (preco === "asc")  filtrados.sort((a,b) => a.price - b.price);
+  if (preco === "desc") filtrados.sort((a,b) => b.price - a.price);
+
+  paginaAtual = 1;
+  renderProducts(filtrados);
+}
+const pesquisarDebounced = debounce(aplicarTudo, 250);
+
+// ---------------- Tradução automática ----------------
+const translations = {
+  pt: { siteTitle:"Segunda Mão Mangop", siteSlogan:"Não é lixo, é oportunidade!!!" },
+  en: { siteTitle:"Mangop Second Hand", siteSlogan:"Not trash, it's opportunity!!!" }
+};
+function applyLanguage() {
+  const lang = (navigator.language || "pt").substring(0,2);
+  const t = translations[lang] || translations.pt;
+  byId("site-title").textContent = t.siteTitle;
+  byId("site-slogan").textContent = t.siteSlogan;
+}
+
+// ---------------- Inicialização ----------------
+document.addEventListener("DOMContentLoaded", () => {
+  renderProducts(produtos);
+  renderCart();
+
+  byId("searchSidebar")?.addEventListener("input", pesquisarDebounced);
+  byId("clearSearchSidebar")?.addEventListener("click", () => {
+    byId("searchSidebar").value = "";
+    aplicarTudo();
+  });
+  byId("filtroCategoria")?.addEventListener("change", aplicarTudo);
+  byId("filtroEstado")?.addEventListener("change", aplicarTudo);
+  byId("filtroMarca")?.addEventListener("input", debounce(aplicarTudo, 250));
+  byId("filtroPreco")?.addEventListener("change", aplicarTudo);
+
+  applyLanguage();
+});
+
+// ---------------- Galerias institucionais ----------------
+const galerias = {
+  1: ["imagens/Mesadejantar6lugares.jpg","imagens/Mesadejantar6lugares-lado.jpg","imagens/Mesadejantar6lugares-detalhe.jpg"],
+  2: ["imagens/SmartphoneSamsungA12.jpg","imagens/SmartphoneSamsungA12-lado.jpg","imagens/SmartphoneSamsungA12-caixa.jpg"],
+  3: ["imagens/ventoinha.jpg","imagens/ventoinha-lado.jpg","imagens/ventoinha-detalhe.jpg"],
+  4: ["imagens/sofa3-2.jpg","imagens/sofa3-2-lado.jpg","imagens/sofa3-2-detalhe.jpg"],
+  5: ["imagens/tv-lg-42.jpg","imagens/tv-lg-42-lado.jpg","imagens/tv-lg-42-detalhe.jpg"],
+  6: ["imagens/cadeira-escritorio.jpg","imagens/cadeira-escritorio-lado.jpg","imagens/cadeira-escritorio-detalhe.jpg"],
+  7: ["imagens/liquidificador.jpg","imagens/liquidificador-lado.jpg","imagens/liquidificador-detalhe.jpg"],
+  8: ["imagens/relogio-inteligente.jpg","imagens/relogio-inteligente-caixa.jpg","imagens/relogio-inteligente-detalhe.jpg"],
+  9: ["imagens/maquina-de-lavar.jpg","imagens/maquina-de-lavar-lado.jpg","imagens/maquina-de-lavar-detalhe.jpg"],
+  10: ["imagens/mesa-de-cabeceira.jpg","imagens/mesa-de-cabeceira-lado.jpg","imagens/mesa-de-cabeceira-detalhe.jpg"],
+  11: ["imagens/aspirador.jpg","imagens/aspirador-lado.jpg","imagens/aspirador-detalhe.jpg"],
+  12: ["imagens/Tablet.jpg","imagens/Tablet-caixa.jpg","imagens/Tablet-detalhe.jpg"],
+  13: ["imagens/cama-casal.jpg","imagens/cama-casal-lado.jpg","imagens/cama-casal-detalhe.jpg"],
+  14: ["imagens/maquina-de-cafe.jpg","imagens/maquina-de-cafe-lado.jpg","imagens/maquina-de-cafe-detalhe.jpg"],
+  15: ["imagens/L03-ELT-0001.jpg","imagens/L03-ELT-0001-lado.jpg","imagens/L03-ELT-0001-detalhe.jpg"]
+};
+
+// ---------------- Modal ----------------
+function openModal(id) {
+  const produto = produtos.find(p => p.id === id);
+  const modal = byId("modal");
+  const imgContainer = byId("modal-images");
+  const mainImage = byId("modal-main-image");
+  const details = byId("modal-details");
+
+  const imgs = galerias[id] || [produto.image];
+
+  // Imagem principal grande
+  mainImage.innerHTML = `<img src="${imgs[0]}" alt="${produto.name}">`;
+
+  // Miniaturas
+  imgContainer.innerHTML = imgs.map(
+    src => `<img src="${src}" alt="${produto.name}" onclick="showMainImage('${src}','${produto.name}')">`
+  ).join("");
+
+  // Detalhes
+  details.innerHTML = `
+    <h2>${produto.name}</h2>
+    <p><strong>Preço:</strong> ${fmtKZ(produto.price)}</p>
+    <p><strong>Estado:</strong> ${produto.estado}</p>
+    <p><strong>Marca:</strong> ${produto.marca}</p>
+    <p><strong>Categoria:</strong> ${produto.category}</p>
+  `;
+
+  modal.style.display = "flex"; // centralizado com flex
+}
+
+function showMainImage(src, alt) {
+  byId("modal-main-image").innerHTML = `<img src="${src}" alt="${alt}">`;
+}
+
+function closeModal() {
+  byId("modal").style.display = "none";
+}
+
+// Fechar ao clicar fora
+window.onclick = function(event) {
+  const modal = byId("modal");
+  if (event.target === modal) {
+    closeModal();
+  }
+};
+</script>
+</body>
+</html>

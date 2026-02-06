@@ -1,0 +1,314 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Segunda Mão Mangop</title>
+  <link rel="icon" type="image/jpeg" href="imagens/logo-mangop.jpg">
+  <style>
+    :root { --primary:#0077b6; --accent:#90e0ef; --bg:#f7fbff; --text:#023e8a; --card:#fff; }
+    * { box-sizing:border-box; }
+    body { font-family:'Segoe UI',system-ui,sans-serif; margin:0; background:var(--bg); color:var(--text); }
+
+    header {
+      position:sticky; top:0; z-index:1000; background:var(--primary); color:#fff; padding:1rem;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    }
+    header a { text-decoration:none; display:flex; align-items:center; gap:1rem; color:#fff; }
+    header h1 { margin:0; font-size:1.2rem; }
+    header p { margin:0; font-size:0.9rem; font-style:italic; }
+
+    .search-bar { display:flex; gap:0.5rem; max-width:520px; width:100%; }
+    .search-bar input, .search-bar button { padding:0.6rem; border-radius:6px; border:1px solid #d8dce2; }
+    .search-bar input { flex:1; }
+    .search-bar button { background:#fff; color:#0077b6; font-weight:600; cursor:pointer; }
+
+    .btn-acao { display:inline-block; margin:.5rem .3rem 0 0; padding:.6rem 1rem; border-radius:6px; font-weight:600; text-decoration:none; color:#fff; }
+    .btn-publicar { background:#0077b6; }
+    .btn-carrinho { background:#0096c7; }
+    .btn-ver-todos { background:#ff8800; }
+    .btn-pagamento { background:#fff; color:#0077b6; border:1px solid #0077b6; font-weight:600; border-radius:6px; padding:8px 12px; text-decoration:none; }
+    .btn-pagamento:hover { background:#084c73; color:#fff; }
+    button.orange { background:#ff8800; color:#fff; border:none; font-weight:600; }
+
+    footer {
+      text-align:center; padding:20px; background:#0077b6; color:#fff; margin-top:40px;
+      font-size:0.95rem; line-height:1.6;
+    }
+
+    /* Compactar header no mobile */
+    @media (max-width:600px){
+      header { padding:.4rem .6rem; flex-direction:column; align-items:flex-start; gap:.4rem; }
+      header a img { height:36px; }
+      header h1 { font-size:1rem; margin-bottom:.2rem; }
+      header p { font-size:.75rem; }
+      .search-bar { flex-direction:column; width:100%; gap:.3rem; }
+      .search-bar input { height:34px; font-size:.85rem; width:100%; }
+      .search-bar button, .search-bar a { font-size:.75rem; padding:.3rem .5rem; width:fit-content; }
+      .search-bar a { background:#25D366; border-radius:4px; font-weight:500; }
+    }
+  </style>
+</head>
+<header>
+  <a href="index.html">
+    <img src="imagens/logo-mangop.jpg" alt="Logomarca Segunda Mão Mangop" style="height:56px; border-radius:8px;" />
+    <div>
+      <h1>Segunda Mão Mangop</h1>
+      <p>Não é lixo, é oportunidade!!!</p>
+    </div>
+  </a>
+
+  <!-- Botão só para mobile -->
+  <a href="publicar.html" class="btn-acao btn-publicar mobile-only">📢 Publicar anúncio</a>
+
+  <div class="search-bar">
+    <input id="search" type="text" placeholder="Pesquisar produto..." aria-label="Pesquisar produto" />
+    <button class="orange" id="clearSearch" aria-label="Limpar pesquisa">Limpar</button>
+    <a href="https://wa.me/244976194731" target="_blank" class="btn-acao" style="background:#25D366;">💬 Falar no WhatsApp</a>
+    <a href="pagamento.html" class="btn-acao btn-pagamento">💳 Pagamento Seguro</a>
+  </div>
+</header>
+<main class="content">
+  <!-- Filtros -->
+  <aside class="sidebar filtros">
+    <h2>Filtros</h2>
+    <!-- mantém os filtros existentes -->
+    <a href="index.html" class="btn-acao btn-ver-todos">🔄 Ver todos os produtos</a>
+    <a href="publicar.html" class="btn-acao btn-publicar">📢 Publicar anúncio</a>
+  </aside>
+  <!-- Produtos e Carrinho continuam como já tens -->
+</main>
+<footer>
+  Segunda Mão Mangop – Não é lixo, é oportunidade<br>
+  📍 Kilamba, Luanda – Angola |
+  <img src="imagens/whatsapp-logo.jpg" alt="WhatsApp" style="height:16px; vertical-align:middle; margin-right:6px;">
+  <a href="https://wa.me/244976194731" target="_blank" style="color:#fff; text-decoration:underline;">+244 976 194 731</a><br>
+  <a href="pagamento.html" class="btn-pagamento">💳 Pagamento Seguro</a>
+</footer>
+<main class="content">
+  <!-- Filtros -->
+  <aside class="sidebar filtros">
+    <h2>Filtros</h2>
+
+    <label for="filtroCategoria">Categoria</label>
+    <select id="filtroCategoria">
+      <option value="">Todas</option>
+      <option>Móveis</option>
+      <option>Eletrónica</option>
+      <option>Moda</option>
+      <option>Casa e Jardim</option>
+      <option>Ferramentas</option>
+      <option>Outros</option>
+    </select>
+
+    <label for="filtroEstado">Estado</label>
+    <select id="filtroEstado">
+      <option value="">Todos</option>
+      <option>Usado</option>
+      <option>Como novo</option>
+      <option>Selado</option>
+    </select>
+
+    <label for="filtroMarca">Marca</label>
+    <input id="filtroMarca" type="text" placeholder="Ex: Samsung, Bosch..." />
+
+    <label for="filtroPreco">Ordenar por preço</label>
+    <select id="filtroPreco">
+      <option value="">Sem ordenação</option>
+      <option value="asc">Menor preço</option>
+      <option value="desc">Maior preço</option>
+    </select>
+
+    <a href="index.html" class="btn-acao btn-ver-todos">🔄 Ver todos os produtos</a>
+    <a href="publicar.html" class="btn-acao btn-publicar">📢 Publicar anúncio</a>
+  </aside>
+
+  <!-- Produtos -->
+  <section>
+    <div class="container" id="product-list"></div>
+    <div id="pagination"></div>
+    <div style="margin-top:1rem; text-align:center;">
+      <a href="https://wa.me/244976194731" target="_blank" class="btn-acao" style="background:#25D366;">💬 Falar no WhatsApp</a>
+      <a href="publicar.html" class="btn-acao btn-publicar">📢 Publicar anúncio</a>
+      <a href="carrinho.html" class="btn-acao btn-carrinho">🛒 Ir para Carrinho</a>
+    </div>
+  </section>
+
+  <!-- Carrinho -->
+<aside class="sidebar carrinho" id="cartSidebar">
+  <h2>Carrinho</h2>
+  <div id="cart-items"></div>
+  <div class="cart-total">
+    <span>Total</span>
+    <span id="cart-total">0 Kz</span>
+  </div>
+  <!-- Botão aponta para carrinho.html -->
+  <button onclick="window.location.href='carrinho.html'">🛒 Finalizar Compras</button>
+</aside>
+
+<!-- Toggle do carrinho (aparece apenas no mobile via CSS) -->
+<button class="cart-toggle" id="cartToggle" aria-label="Abrir/Fechar carrinho">🛒 Carrinho</button>
+</main>
+<footer>
+  Segunda Mão Mangop – Não é lixo, é oportunidade<br>
+  📍 Kilamba, Luanda – Angola |
+  <img src="imagens/whatsapp-logo.jpg" alt="WhatsApp" style="height:16px; vertical-align:middle; margin-right:6px;">
+  <a href="https://wa.me/244976194731" target="_blank" style="color:#fff; text-decoration:underline;">+244 976 194 731</a><br>
+  <a href="pagamento.html" class="btn-pagamento">💳 Pagamento Seguro</a>
+</footer>
+<script>
+  const byId = (id) => document.getElementById(id);
+  const fmtKZ = (v) => `${v.toLocaleString('pt-PT')} Kz`;
+
+  // Normaliza acentos para pesquisa robusta
+  const normalize = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+  // Debounce para evitar repintar em excesso
+  function debounce(fn, delay = 250) {
+    let t;
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), delay); };
+  }
+
+  // ---------- Produtos de exemplo ----------
+  const produtos = [
+    {id:1, name:"Mesa de jantar 6 lugares", price:45000, estado:"Usado", marca:"Madeira Angola", category:"Móveis", image:"imagens/Mesadejantar6lugares.jpg"},
+    {id:2, name:"Smartphone Samsung A12", price:85000, estado:"Como novo", marca:"Samsung", category:"Eletrónica", image:"imagens/SmartphoneSamsungA12.jpg"},
+    {id:3, name:"Ventoinha de pé", price:12000, estado:"Usado", marca:"Binatone", category:"Eletrónica", image:"imagens/sample3.jpg"},
+    {id:4, name:"Conjunto de sofás 3+2", price:95000, estado:"Como novo", marca:"DecoLux", category:"Móveis", image:"imagens/sample4.jpg"},
+    {id:5, name:"TV LG 42\"", price:110000, estado:"Usado", marca:"LG", category:"Eletrónica", image:"imagens/sample5.jpg"},
+    {id:6, name:"Cadeira de escritório", price:60000, estado:"Como novo", marca:"IKEA", category:"Casa e Jardim", image:"imagens/sample6.jpg"},
+    {id:7, name:"Liquidificador", price:15000, estado:"Usado", marca:"Philips", category:"Casa e Jardim", image:"imagens/sample7.jpg"},
+    {id:8, name:"Relógio inteligente", price:30000, estado:"Selado", marca:"Apple", category:"Moda", image:"imagens/sample8.jpg"},
+    {id:9, name:"Máquina de lavar", price:120000, estado:"Usado", marca:"Samsung", category:"Eletrónica", image:"imagens/sample9.jpg"},
+    {id:10, name:"Mesa de cabeceira", price:25000, estado:"Como novo", marca:"DecoLux", category:"Móveis", image:"imagens/sample10.jpg"},
+    {id:11, name:"Aspirador", price:40000, estado:"Usado", marca:"Bosch", category:"Casa e Jardim", image:"imagens/sample11.jpg"},
+    {id:12, name:"Tablet Lenovo", price:70000, estado:"Selado", marca:"Lenovo", category:"Eletrónica", image:"imagens/sample12.jpg"},
+    {id:13, name:"Cama de casal", price:100000, estado:"Usado", marca:"IKEA", category:"Móveis", image:"imagens/sample13.jpg"},
+    {id:14, name:"Máquina de café", price:35000, estado:"Como novo", marca:"Nespresso", category:"Casa e Jardim", image:"imagens/sample14.jpg"},
+    {id:15, name:"Trotinete elétrica", price:150000, estado:"Selado", marca:"Xiaomi", category:"Moda", image:"imagens/sample15.jpg"},
+    {id:16, name:"Coluna Bluetooth", price:20000, estado:"Usado", marca:"JBL", category:"Eletrónica", image:"imagens/sample16.jpg"},
+    {id:17, name:"Berço", price:30000, estado:"Como novo", marca:"Chicco", category:"Móveis", image:"imagens/sample17.jpg"},
+    {id:18, name:"Fogão 4 bocas", price:80000, estado:"Usado", marca:"Electrolux", category:"Casa e Jardim", image:"imagens/sample18.jpg"},
+    {id:19, name:"Máquina de costura", price:50000, estado:"Usado", marca:"Singer", category:"Ferramentas", image:"imagens/sample19.jpg"},
+    {id:20, name:"Câmara fotográfica", price:90000, estado:"Como novo", marca:"Canon", category:"Eletrónica", image:"imagens/sample20.jpg"}
+  ];
+
+  const IMG_PH = "https://via.placeholder.com/300x300?text=Produto";
+  let cart = JSON.parse(localStorage.getItem("carrinhoSegundaMaoMangop")) || [];
+  let paginaAtual = 1;
+  const itensPorPagina = 50;
+
+  // Renderização dos produtos
+  function renderProducts(list) {
+    const el = byId("product-list");
+    el.innerHTML = "";
+
+    const inicio = (paginaAtual - 1) * itensPorPagina;
+    const fim = inicio + itensPorPagina;
+    const pagina = list.slice(inicio, fim);
+
+    pagina.forEach(p => {
+      const imgSrc = (p.image && p.image.trim()) ? p.image : IMG_PH;
+      const card = document.createElement("div");
+      card.className = "product";
+      card.innerHTML = `
+        <img src="${imgSrc}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <div class="price">${fmtKZ(p.price)}</div>
+        <p><small>${p.estado} | ${p.marca}</small></p>
+        <div class="actions">
+          <button onclick="addToCart(${p.id})">Adicionar ao carrinho</button>
+          <button class="outline" onclick="moreLikeThis('${p.category}','${p.marca}')">Ver similares</button>
+        </div>
+      `;
+      el.appendChild(card);
+    });
+
+    // Paginação
+    const totalPaginas = Math.ceil(list.length / itensPorPagina);
+    const paginador = byId("pagination");
+    paginador.innerHTML = "";
+    if (totalPaginas > 1) {
+      if (paginaAtual > 1) {
+        const btnPrev = document.createElement("button");
+        btnPrev.textContent = "⬅️ Página anterior";
+        btnPrev.onclick = () => { paginaAtual--; renderProducts(list); };
+        paginador.appendChild(btnPrev);
+      }
+      if (paginaAtual < totalPaginas) {
+        const btnNext = document.createElement("button");
+        btnNext.textContent = "➡️ Próxima página";
+        btnNext.onclick = () => { paginaAtual++; renderProducts(list); };
+        paginador.appendChild(btnNext);
+      }
+    }
+  }
+
+  // Renderização do carrinho
+  function renderCart() {
+    const itemsEl = byId("cart-items");
+    itemsEl.innerHTML = "";
+    cart.forEach((item, index) => {
+      const subtotal = item.price * (item.quantidade || 1);
+      const row = document.createElement("div");
+      row.className = "cart-item";
+      row.innerHTML = `
+        <span>${item.name}</span>
+        <span>${fmtKZ(item.price)} (cada)</span>
+        <div>
+          <button onclick="alterarQuantidade(${index}, -1)">-</button>
+          <span>${item.quantidade || 1}</span>
+          <button onclick="alterarQuantidade(${index}, 1)">+</button>
+          <span>Subtotal: ${fmtKZ(subtotal)}</span>
+          <button class="outline" onclick="removeFromCart(${index})">Remover</button>
+        </div>
+      `;
+      itemsEl.appendChild(row);
+    });
+    const total = cart.reduce((sum, i) => sum + i.price * (i.quantidade || 1), 0);
+    byId("cart-total").textContent = fmtKZ(total);
+  }
+</script>
+<script>
+  // Adicionar produto ao carrinho
+  function addToCart(id) {
+    const produto = produtos.find(p => p.id === id);
+    const existente = cart.find(i => i.id === id);
+    if (existente) {
+      existente.quantidade = (existente.quantidade || 1) + 1;
+    } else {
+      cart.push({...produto, quantidade:1});
+    }
+    localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+    renderCart();
+  }
+
+  // Alterar quantidade
+  function alterarQuantidade(index, delta) {
+    if (!cart[index]) return;
+    cart[index].quantidade = (cart[index].quantidade || 1) + delta;
+    if (cart[index].quantidade <= 0) {
+      cart.splice(index, 1);
+    }
+    localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+    renderCart();
+  }
+
+  // Remover item do carrinho
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+    renderCart();
+  }
+
+  // Mostrar produtos similares
+  function moreLikeThis(category, marca) {
+    const filtrados = produtos.filter(p => p.category === category || p.marca === marca);
+    paginaAtual = 1;
+    renderProducts(filtrados);
+  }
+
+  // Inicialização
+  renderProducts(produtos);
+  renderCart();
+</script>
+</body>
+</html>

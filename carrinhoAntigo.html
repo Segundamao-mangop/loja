@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrinho & Checkout - Segunda Mão Mangop</title>
+  <link rel="icon" type="image/jpeg" href="imagens/logo-mangop.jpg">
+  <style>
+    body { font-family:'Segoe UI',system-ui,sans-serif; margin:0; background:#f7fbff; color:#023e8a; }
+    header { position:sticky; top:0; z-index:1000; background:#0077b6; color:#fff; padding:1rem;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
+    header h1 { margin:0; font-size:1.2rem; }
+    header p { margin:0; font-size:0.9rem; font-style:italic; }
+    .cart { background:#fff; padding:1rem; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); max-width:720px; margin:2rem auto; }
+    .cart-item { display:grid; grid-template-columns:1fr auto auto; gap:.5rem; align-items:center; margin-bottom:.5rem; }
+    .cart-total { display:flex; justify-content:space-between; padding-top:.6rem; border-top:2px solid #eef0f4; font-weight:600; margin-top:.5rem; }
+    label { display:block; margin-top:1rem; font-weight:600; }
+    input, textarea { width:100%; padding:0.6rem; margin-top:0.3rem; border-radius:6px; border:1px solid #ccc; font-size:1rem; }
+    textarea { resize:vertical; min-height:80px; }
+    button { background:#0077b6; color:#fff; border:none; padding:.55rem .7rem; border-radius:6px; cursor:pointer; font-size:.9rem; margin-top:0.3rem; }
+    button.outline { background:transparent; color:#0077b6; border:1px solid #0077b6; }
+    .btn-whatsapp { background:#25D366; color:#fff; text-decoration:none; padding:.6rem 1rem; border-radius:6px; display:inline-block; margin-top:.5rem; }
+    .btn-home { background:#03045e; color:#fff; text-decoration:none; padding:.6rem 1rem; border-radius:6px; display:inline-block; margin-top:.5rem; margin-left:.5rem; }
+    .btn-publicar { background:#0077b6; color:#fff; text-decoration:none; padding:.6rem 1rem; border-radius:6px; display:inline-block; margin-top:.5rem; margin-left:.5rem; }
+    footer { text-align:center; margin-top:2rem; font-size:0.9rem; color:#555; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" style="text-decoration:none; display:flex; align-items:center; gap:1rem;">
+      <img src="imagens/logo-mangop.jpg" alt="Logomarca Segunda Mão Mangop" style="height:60px;" />
+      <div>
+        <h1 style="margin:0; font-size:1.2rem;">Segunda Mão Mangop</h1>
+        <p style="margin:0; font-size:0.9rem; font-style:italic;">Não é lixo, é oportunidade</p>
+      </div>
+    </a>
+  </header>
+
+  <div class="cart">
+    <h2>🛒 Carrinho & Checkout</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cart-total">0 Kz</span>
+    </div>
+
+    <label for="endereco">📍 Local de entrega</label>
+    <input type="text" id="endereco" placeholder="Ex: Kilamba, Luanda" />
+
+    <label for="contacto">📞 Contacto alternativo</label>
+    <input type="text" id="contacto" placeholder="Ex: +244..." />
+
+    <label for="observacoes">📝 Observações</label>
+    <textarea id="observacoes" placeholder="Ex: entregar após as 18h"></textarea>
+
+    <button id="checkoutBtn">Finalizar Compra</button>
+    <a href="https://wa.me/244976194731" target="_blank" class="btn-whatsapp">Conversar no WhatsApp</a>
+    <a href="index.html" class="btn-home">🏠 Home</a>
+    <a href="publicar.html" class="btn-publicar">📢 Publicar anúncio</a>
+  </div>
+
+  <footer>
+    Segunda Mão Mangop – Não é lixo, é oportunidade<br>
+    📍 Kilamba, Luanda – Angola | 📲 WhatsApp: +244976194731
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("carrinhoSegundaMaoMangop")) || [];
+    const fmtKZ = (v) => `${v.toLocaleString('pt-PT')} Kz`;
+    const byId = (id) => document.getElementById(id);
+
+    function renderCart() {
+      const itemsEl = byId("cart-items");
+      itemsEl.innerHTML = "";
+      cart.forEach((item, index) => {
+        const subtotal = item.price * (item.quantidade || 1);
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+          <span>${item.name}</span>
+          <span>${fmtKZ(item.price)} (cada)</span>
+          <div>
+            <button onclick="alterarQuantidade(${index}, -1)">-</button>
+            <span>${item.quantidade || 1}</span>
+            <button onclick="alterarQuantidade(${index}, 1)">+</button>
+            <span>Subtotal: ${fmtKZ(subtotal)}</span>
+            <button class="outline" onclick="removeFromCart(${index})">Remover</button>
+          </div>
+        `;
+        itemsEl.appendChild(row);
+      });
+      const total = cart.reduce((sum, i) => sum + i.price * (i.quantidade || 1), 0);
+      byId("cart-total").textContent = fmtKZ(total);
+    }
+
+    function alterarQuantidade(index, delta) {
+      cart[index].quantidade = (cart[index].quantidade || 1) + delta;
+      if (cart[index].quantidade <= 0) {
+        removeFromCart(index);
+      } else {
+        localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+        renderCart();
+      }
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function finalizePurchase() {
+      if (cart.length === 0) {
+        alert("Carrinho vazio!");
+        return;
+      }
+
+      const itensCompra = [...cart];
+      cart = [];
+      localStorage.setItem("carrinhoSegundaMaoMangop", JSON.stringify(cart));
+      renderCart();
+
+      const endereco = byId("endereco").value.trim() || "não informado";
+      const contacto = byId("contacto").value.trim() || "não informado";
+      let observacoes = byId("observacoes").value.trim() || "nenhuma";
+
+      observacoes = observacoes
+        .normalize("NFKD")
+        .replace(/[\u200B-\u200D\uFEFF]/g, "")
+        .replace(/[^\x20-\x7EÀ-ÿ.,:;!?()\s]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      const msgProdutos = itensCompra.map(i =>
+        `• ${i.quantidade || 1}x ${i.name} – ${fmtKZ(i.price)} cada (Subtotal: ${fmtKZ(i.price * (i.quantidade || 1))})`.trim()
+      ).join("\n");
+
+      const total = itensCompra.reduce((sum, i) => sum + i.price * (i.quantidade || 1), 0);
+
+      const texto = `Olá, quero finalizar a compra:\n\n${msgProdutos}\n\nTotal: ${fmtKZ(total)}\n\n📍 Local de entrega: ${endereco}\n📞 Contacto: ${contacto}\n📝 Observações: ${observacoes}`;
+
+      window.open(`https://wa.me/244976194731?text=${encodeURIComponent(texto)}`, "_blank");
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCart();
+      byId("checkoutBtn").addEventListener("click", finalizePurchase);
+    });
+  </
