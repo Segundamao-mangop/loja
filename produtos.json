@@ -126,15 +126,8 @@
     "category": "Eletrodomesticos",
     "image": "imagens/L03-ELT-0001.jpg"
   }
-  {
-    "id": 4,
-    "name": "Conjunto de sofás 3+2",
-    "price": 95000,
-    "estado": "Como novo",
-    "marca": "DecoLux",
-    "category": "Móveis",
-    "image": "imagens/sofa3-2.jpg"
-  },
+  
 
 ]
+
 
