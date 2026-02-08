@@ -58,7 +58,14 @@
       transition:transform .08s ease, box-shadow .08s ease;
     }
     .product:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.08); }
-    .product img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; background:#e9edf3; }
+	
+    .product img { 
+  width:100%; 
+  aspect-ratio:1/1; 
+  object-fit:contain;   /* mostra a imagem inteira */
+  border-radius:8px; 
+  background:#e9edf3;   /* fundo neutro para preencher espaço vazio */
+}
     .product h3 { margin:.6rem 0 .3rem; font-size:1rem; }
     .price { font-weight:600; color:var(--primary); margin-bottom:.2rem; }
     .product small { color:#6c7a92; }
