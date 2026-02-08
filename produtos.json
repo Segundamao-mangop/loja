@@ -126,8 +126,19 @@
     "category": "Eletrodomesticos",
     "image": "imagens/L03-ELT-0001.jpg"
   }
+  {
+    "id": 17,
+    "name": "Mesa Xenyx",
+    "price": 455000,
+    "estado": "Usado",
+    "marca": "Beringer",
+    "category": "Eletrónica",
+    "image": "imagens/L03-ELT-0003.jpg"
+  },
+
   
 
 ]
+
 
 
