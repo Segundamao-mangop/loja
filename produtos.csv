@@ -1,26 +1,22 @@
-﻿ID;Nome;Categoria;Marca;Preço;Estado;Imagem Principal;Imagem Lado;Imagem Detalhe
-15;Geleira Essential;Eletrodomesticos;Essential;350000;Usado;L03-ELT-0001.jpg;L03-ELT-0001-lado.jpg;L03-ELT-0001-detalhe.jpg
-16;Mesa Xenyx;Eletrónica;Beringer;455000;Usado;L03-ELT-0003.jpg;L03-ELT-0003-lado.jpg;L03-ELT-0003-detalhe.jpg
-17;Geleira Zanussi;Eletrodomesticos;Zanussi;247000;Usado;L03-ELT-0004.jpg;
-18;Geleira Flandria;Eletrodomesticos;Flandria;247000;Usado;L03-ELT-0005.jpg;L03-ELT-0005-lado.jpg;
-19;Geleira Daewoo;Eletrodomesticos;Daewoo;650000;Usado;L03-ELT-0006.jpg;L03-ELT-0006-lado.jpg;L03-ELT-0006-detalhes.jpg
-20;Geleira Ignis;Eletrodomesticos;Ignis;324000;Usado;L03-ELT-0007.jpg;L03-ELT-0007-lado.jpg;
-21;Geleira Beko;Eletrodomesticos;Beko;300000;Usado;L03-ELT-0008.jpg;L03-ELT-0008-lado.jpg;
-22;Geleira La sommeliere;Eletrodomesticos;La sommeliere;336000;Usado;L03-ELT-0009.jpg;L03-ELT-0009-lado.jpg;
-23;Maquina de Lavar;Eletrodomesticos;Ariston;300000;Usado;L03-ELT-0010.jpg;L03-ELT-0010-lado.jpg;
-24;Chapa Eletrica 1 boca;Eletrodomesticos;Paris Rhône;54000;Usado;L03-ELT-0011.jpg;L03-ELT-0011-lado.jpg;
-25;Ferro a Vapor;Eletrodomesticos;Fagor;84000;Usado;L03-ELT-0013.jpg;L03-ELT-0013-lado.jpg;
-26;Ferro a Vapor ;Eletrodomesticos;Inox;120000;Usado;L03-ELT-0014.jpg;
-27;Ferro a Vapor;Eletrodomesticos;Delonghi;84000;Usado;L03-ELT-0015.jpg;L03-ELT-0015-lado.jpg;
-28;Coluna Amplificada Marshall;Eletrónica;Marshall;300000;Usado;L03-ELT-0016.jpg;L03-ELT-0016-lado.jpg;L03-ELT-0016-detalhes.jpg
-29;Jogo de Som ;Eletrónica;Audiophony;660000;Usado;L03-ELT-0017.jpg;L03-ELT-0017-lado.jpg;L03-ELT-0017-detalhes.jpg
-30;JBL Boombox Portable Bluetooth ;Eletrónica;JBL Boombox;420000;Usado;L03-ELT-0018.jpg;L03-ELT-0018-lado.jpg;L03-ELT-0018-detalhes.jpg
-31;Mesa Misturadora JBL;Eletrónica;JBL;180000;Usado;L03-ELT-0019.jpg;L03-ELT-0019-lado.jpg;L03-ELT-0019-detalhes.jpg
-32;Viola Ryan;Eletrónica;Ryan;110000;Usado;L03-ELT-0020.jpg;L03-ELT-0020-lado.jpg;L03-ELT-0020-detalhes.jpg
-33;Guitarra;Eletrónica;Phonix HB-33;180000;Usado;L03-ELT-0021.jpg;L03-ELT-0021-lado.jpg;L03-ELT-0021-detalhes.jpg
+ID;Nome;Categoria;Marca;Preço;Estado;Imagem Principal;Imagem 1;Imagem 2
+15;Geleira Essential;Eletrodomesticos;Essential;350000;Usado;L03-ELT-0001.jpg;L03-ELT-0001-1.jpg;
+16;Mesa Xenyx;Eletrónica;Beringer;455000;Usado;L03-ELT-0003.jpg;L03-ELT-0003-1.jpg;L03-ELT-0003-2.jpg
+17;Geleira Zanussi;Eletrodomesticos;Zanussi;247000;Usado;L03-ELT-0004.jpg;;
+18;Geleira Flandria;Eletrodomesticos;Flandria;247000;Usado;L03-ELT-0005.jpg;L03-ELT-0005-1.jpg;
+19;Geleira Daewoo;Eletrodomesticos;Daewoo;650000;Usado;L03-ELT-0006.jpg;L03-ELT-0006-1.jpg;L03-ELT-0006-2.jpg
+20;Geleira Ignis;Eletrodomesticos;Ignis;324000;Usado;L03-ELT-0007.jpg;L03-ELT-0007-1.jpg;
+21;Geleira Beko;Eletrodomesticos;Beko;300000;Usado;L03-ELT-0008.jpg;L03-ELT-0008-1.jpg;
+22;Geleira La sommeliere;Eletrodomesticos;La sommeliere;336000;Usado;L03-ELT-0009.jpg;L03-ELT-0009-1.jpg;
+23;Maquina de Lavar;Eletrodomesticos;Ariston;300000;Usado;L03-ELT-0010.jpg;L03-ELT-0010-1.jpg;
+24;Chapa Eletrica 1 boca;Eletrodomesticos;Paris Rhône;54000;Usado;L03-ELT-0011.jpg;L03-ELT-0011-1.jpg;
+25;Ferro a Vapor;Eletrodomesticos;Fagor;84000;Usado;L03-ELT-0013.jpg;L03-ELT-0013-1.jpg;
+26;Ferro a Vapor;Eletrodomesticos;Inox;120000;Usado;L03-ELT-0014.jpg;;
+27;Ferro a Vapor;Eletrodomesticos;Delonghi;84000;Usado;L03-ELT-0015.jpg;L03-ELT-0015-1.jpg;
+28;Coluna Amplificada Marshall;Eletrónica;Marshall;300000;Usado;L03-ELT-0016.jpg;L03-ELT-0016-1.jpg;L03-ELT-0016-2.jpg
+29;Jogo de Som;Eletrónica;Audiophony;660000;Usado;L03-ELT-0017.jpg;L03-ELT-0017-1.jpg;L03-ELT-0017-2.jpg
+30;JBL Boombox Portable Bluetooth;Eletrónica;JBL Boombox;420000;Usado;L03-ELT-0018.jpg;L03-ELT-0018-1.jpg;L03-ELT-0018-2.jpg
+31;Mesa Misturadora JBL;Eletrónica;JBL;180000;Usado;L03-ELT-0019.jpg;L03-ELT-0019-1.jpg;L03-ELT-0019-2.jpg
+32;Viola Ryan;Eletrónica;Ryan;110000;Usado;L03-ELT-0020.jpg;L03-ELT-0020-1.jpg;L03-ELT-0020-2.jpg
+33;Guitarra;Eletrónica;Phonix HB-33;180000;Usado;L03-ELT-0021.jpg;L03-ELT-0021-1.jpg;L03-ELT-0021-2.jpg
 34;Batuque;Musica;Batuque;420000;Usado;L04-Musica-0001.jpg;;
 35;Bateria Dixon;Musica;Dixon;540000;Usado;L04-Musica-0002.jpg;;
-
-
-
-
