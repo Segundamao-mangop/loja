@@ -6,7 +6,7 @@ ID;Nome;Categoria;Marca;Preço;Estado;Imagem Principal;Imagem 1;Imagem 2
 19;Geleira Daewoo;Eletrodomesticos;Daewoo;650000;Usado;L03-ELT-0006.jpg;L03-ELT-0006-1.jpg;L03-ELT-0006-2.jpg
 20;Geleira Ignis;Eletrodomesticos;Ignis;324000;Usado;L03-ELT-0007.jpg;L03-ELT-0007-1.jpg;
 21;Geleira Beko;Eletrodomesticos;Beko;300000;Usado;L03-ELT-0008.jpg;L03-ELT-0008-1.jpg;
-22;Geleira La sommeliere;Eletrodomesticos;La sommeliere;336000;Usado;L03-ELT-0009.jpg;L03-ELT-0009-1.jpg;
+22;Geleira La sommeliere;Eletrodomesticos;La sommeliere;336000;Usado;L03-ELT-0009.jpg;L03-ELT-0009-1.jpg;L03-ELT-0009-2.jpg;
 23;Maquina de Lavar;Eletrodomesticos;Ariston;300000;Usado;L03-ELT-0010.jpg;L03-ELT-0010-1.jpg;
 24;Chapa Eletrica 1 boca;Eletrodomesticos;Paris Rhône;54000;Usado;L03-ELT-0011.jpg;L03-ELT-0011-1.jpg;
 25;Ferro a Vapor;Eletrodomesticos;Fagor;84000;Usado;L03-ELT-0013.jpg;L03-ELT-0013-1.jpg;
@@ -20,3 +20,4 @@ ID;Nome;Categoria;Marca;Preço;Estado;Imagem Principal;Imagem 1;Imagem 2
 33;Guitarra;Eletrónica;Phonix HB-33;180000;Usado;L03-ELT-0021.jpg;L03-ELT-0021-1.jpg;L03-ELT-0021-2.jpg
 34;Batuque;Musica;Batuque;420000;Usado;L04-Musica-0001.jpg;;
 35;Bateria Dixon;Musica;Dixon;540000;Usado;L04-Musica-0002.jpg;;
+
