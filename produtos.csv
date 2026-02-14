@@ -1,8 +1,8 @@
 ﻿ID;Nome;Categoria;Marca;Preço;Estado;Imagem Principal;Imagem Lado;Imagem Detalhe
 15;Geleira Essential;Eletrodomesticos;Essential;350000;Usado;L03-ELT-0001.jpg;L03-ELT-0001-lado.jpg;L03-ELT-0001-detalhe.jpg
 16;Mesa Xenyx;Eletrónica;Beringer;455000;Usado;L03-ELT-0003.jpg;L03-ELT-0003-lado.jpg;L03-ELT-0003-detalhe.jpg
-17;Geleira Zanussi;Eletrodomesticos;Zanussi;247000;Usado;L03-ELT-004.jpg;
-18;Geleira Flandria;Eletrodomesticos;Flandria;247000;Usado;L03-ELT-005.jpg;L03-ELT-0005-lado.jpg;
+17;Geleira Zanussi;Eletrodomesticos;Zanussi;247000;Usado;L03-ELT-0004.jpg;
+18;Geleira Flandria;Eletrodomesticos;Flandria;247000;Usado;L03-ELT-0005.jpg;L03-ELT-0005-lado.jpg;
 19;Geleira Daewoo;Eletrodomesticos;Daewoo;650000;Usado;L03-ELT-0006.jpg;L03-ELT-0006-lado.jpg;L03-ELT-0006-detalhes.jpg
 20;Geleira Ignis;Eletrodomesticos;Ignis;324000;Usado;L03-ELT-0007.jpg;L03-ELT-0007-lado.jpg;
 21;Geleira Beko;Eletrodomesticos;Beko;300000;Usado;L03-ELT-0008.jpg;L03-ELT-0008-lado.jpg;
@@ -20,5 +20,6 @@
 33;Guitarra;Eletrónica;Phonix HB-33;180000;Usado;L03-ELT-0021.jpg;L03-ELT-0021-lado.jpg;L03-ELT-0021-detalhes.jpg
 34;Batuque;Musica;Batuque;420000;Usado;L04-Musica-0001.jpg;;
 35;Bateria Dixon;Musica;Dixon;540000;Usado;L04-Musica-0002.jpg;;
+
 
 
